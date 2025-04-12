@@ -1,0 +1,32 @@
+# This is a template for your development Dockerfile
+# You should modify this to suit your specific React application needs
+
+# Use Node.js LTS Alpine for a smaller image size
+FROM node:18-alpine
+
+# Set working directory in the container
+WORKDIR /app
+
+# Copy package files for dependency installation
+# Adjust for your package manager (npm, yarn, pnpm)
+COPY package.json package-lock.json ./
+
+# Install dependencies
+# Change this if you use a different package manager
+RUN npm install
+
+# Copy the rest of the application code
+# Note: When using docker-compose, we'll override this with a volume mount
+COPY . .
+
+# Expose the port Vite uses (default is 5173)
+EXPOSE 5173
+
+# Start the development server with host set to 0.0.0.0
+# This allows connections from outside the container
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
+# NOTE: For hot reload to work properly, you'll need to:
+# 1. Use docker-compose to mount your source code as a volume
+# 2. Ensure Vite is configured to watch for changes
+# 3. Ensure your host machine's port is mapped to the container port 

@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # You can name your service anything you want (app, frontend, etc.)
+  app:
+    # Build from the Dockerfile.dev in the current directory
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    
+    # Optional: Give your container a specific name
+    container_name: react-dev
+    
+    # Map container port 5173 (Vite) to host port 5173
+    # Change this if you need to use a different port on your host
+    ports:
+      - "5173:5173"
+    
+    # Mount the current directory to /app in the container
+    # This enables hot reloading by reflecting file changes immediately
+    volumes:
+      - .:/app
+      # This prevents node_modules in the container from being overwritten by the host
+      - /app/node_modules
+    
+    # Set environment to development
+    environment:
+      - NODE_ENV=development
+      # Add any other environment variables your app needs
+      
+    # Optional: Healthcheck to verify the container is running properly
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5173"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s 
