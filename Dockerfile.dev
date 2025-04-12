@@ -6,12 +6,18 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy package.json and lock file
+# Doing this first before copying the rest of the project 
+# to optimize Docker's build process by leveraging layer caching.
 COPY package.json package-lock.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy project files
+# Copy project files + directories 
+# from the current directory on the host machine 
+# (where the Docker build command is run) 
+# into the working directory inside the Docker image 
+# (in this case, /app)
 COPY . .
 
 # Expose the port Vite uses (default is 5173)
