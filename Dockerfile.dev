@@ -1,0 +1,22 @@
+# Development Dockerfile with hot reload for Vite React application
+FROM node:18-alpine
+
+# Sets the working directory inside the docker image.
+# Creates one if it doesn't already exist
+WORKDIR /app
+
+# Copy package.json and lock file
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy project files
+COPY . .
+
+# Expose the port Vite uses (default is 5173)
+EXPOSE 5173
+
+# Start the development server with host set to 0.0.0.0
+# This allows connections from outside the container
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
