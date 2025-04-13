@@ -25,22 +25,24 @@ concurrency:
 
 jobs:
   # Build job
+  # - Responsible for compiling the application (e.g., running npm run build)
+  #     and preparing the files needed for deployment.
+  # - Needed to build the artifacts (./dist folder) and upload them
+  #     to pass them to the deploy job
   build:
     runs-on: ubuntu-latest
     steps:
       # Clones the repository's code into the runner's workspace
-      # Without this step, the runner (the virtual machine
-      # executing the workflow) would not have access to the repository's code
-      #
+      #     - Without this step, the runner (the virtual machine
+      #         executing the workflow) would not have access to the repository's code
       # After this step runs, the repository's files will be available
-      # in the runner's workspace, typically at
-      # /home/runner/work/<repository-name>/<repository-name>
+      #     - in the runner's workspace, typically at
+      #         /home/runner/work/<repository-name>/<repository-name>
 
       - name: Checkout repository
         uses: actions/checkout@v4
 
       # Setup your package manager (choose one of npm, yarn, or pnpm)
-      # Uncomment the section for your preferred package manager
 
       # For npm:
       - name: Setup Node.js

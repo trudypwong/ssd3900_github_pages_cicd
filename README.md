@@ -1,10 +1,23 @@
-# SSD3900 Github Pages + CI/CD Pipeline
+# GitHub Actions, Pages, CI/CD Pipeline + Docker
 
 [![Deploy to GitHub Pages](https://github.com/trudypwong/ssd3900_github_pages_cicd/actions/workflows/deploy.yml/badge.svg)](https://github.com/trudypwong/ssd3900_github_pages_cicd/actions/workflows/deploy.yml)
 
 ## Project Description
 
-A basic webpage for publishing to GitHub Pages and experimenting with GitHub Actions and the CI/CD Pipeline. It was created using React and has an input to change and view colours.
+The purpose of this repository is to learn and practice using **GitHub Actions**. The actions used were to build and deploy a simple React application to **GitHub Pages**.
+
+Build
+
+    - actions/checkout@v4
+    - actions/setup-node@v4
+    - actions/upload-pages-artifact@v3
+    - actions/upload-artifact@v4
+
+Deploy
+
+    - actions/deploy-pages@v4
+
+In addition to GitHub Pages, this repository utilized **Docker files** for a development environment and has a **health check** which passes.
 
 ## Live Demo
 

@@ -8,14 +8,30 @@ services:
     container_name: ssd3900_github_pages_cicd
     ports:
       - '5173:5173'
+    # volume mounts are used to
+    #   - map files or directories from
+    #     the host machine to the container.
+    # For hot reload in a development environment
+    #     (e.g., with Vite or React),
+    #   - you need to mount your project directory into the container
+    #     so that changes made on the host machine are reflected inside
+    #     the container in real time.
     volumes:
       - .:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development
+    # It periodically runs a command to verify that the service is running and responding as expected.
     healthcheck:
+      # Specifies the command to run for the health check
+      # -qO-:
+      #     - Suppresses output and writes the response to standard output. If the server responds
+      #       successfully, the health check passes.
       test: ['CMD', 'wget', '-qO-', 'http://localhost:5173']
+      # : The time between health check attempts
       interval: 30s
       timeout: 10s
+      # The number of consecutive failures required before the container is marked as unhealthy
       retries: 3
+      # Grace period after the container starts, during which health checks can fail without marking the container as unhealthy
       start_period: 10s

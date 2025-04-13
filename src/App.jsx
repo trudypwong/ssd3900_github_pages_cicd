@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <h1>Docker Assignment #2</h1>
+      <h1>Docker + GitHub Actions </h1>
       <p>SSD3900 DevOps and Containerization</p>
       <div className="container" style={{ borderColor: colour }}>
         <p>Trying out input type='color'</p>

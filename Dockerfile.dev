@@ -5,6 +5,9 @@ FROM node:18-alpine
 # Creates one if it doesn't already exist
 WORKDIR /app
 
+# Install wget (needed for health checks or other purposes)
+RUN apk add --no-cache wget
+
 # Copy package.json and lock file
 # Doing this first before copying the rest of the project 
 # to optimize Docker's build process by leveraging layer caching.
